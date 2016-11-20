@@ -29,7 +29,6 @@ def get_average_activity_pos(img):
     val = img.getNumpy()
     activity = (val[:,:,1] < 1)
     count = activity.sum()
-    total = [0,0]
     avg = (activity.sum(axis=1)*frame_bar).sum()/count
     return [(avg,0),count]
 
