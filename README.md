@@ -5,7 +5,7 @@ Project for a automatic videographer system for recording sports matches.
 The aim is to create a computer vision tracking system that can run on a Raspberry Pi using the camera module that tracks the action happening on a rugby pitch.
 
 ## Implimentation goal
-The final aim is to use the system to record a tag rugby matches with next to no human intervention. 
+The final aim is to use the system to record a tag rugby matches with no human intervention. 
 
 ## Technology to use
 * Raspberry Pi
