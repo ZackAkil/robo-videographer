@@ -18,3 +18,11 @@ The final aim is to use the system to record a tag rugby matches with next to no
 1. Get OpenCV/SimpleCV working on the Raspberry Pi with the camera.
 2. Build a program that tracks the pixel activity (with directional momentum).
 3. Output activity value to a servo position.
+
+## Progress
+- [x] Get OpenCV/SimpleCV working on computer
+- [x] Develope simple 'action tracking'
+- [ ] Develope simple servo control on raspberry pi
+- [ ] Add 'smooth action tracking'
+- [ ] Get OpenCV/SimpleCV working on raspberry pi
+- [ ] Merge action tracking with servo control
