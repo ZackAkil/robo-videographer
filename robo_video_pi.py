@@ -5,9 +5,6 @@ import wiringpi
 
 cam = Camera()
 
-frame_spec = [cam.getImage().width, cam.getImage().height]
-frame_bar = np.array(range(frame_spec[0]))
-
 # use 'GPIO naming'
 wiringpi.wiringPiSetupGpio()
 # set #18 to be a PWM output
@@ -24,12 +21,16 @@ def set_servo(degrees):
     pulse = int((200/180.0)*degrees) + 50
     wiringpi.pwmWrite(18, pulse)
 
+frame_spec = [160, 120]
+frame_bar = np.array(range(frame_spec[0]))
 
 def get_average_activity_pos(img):
     val = img.getNumpy()
     activity = (val[:,:,1] < 1)
     count = activity.sum()
-    avg = (activity.sum(axis=1)*frame_bar).sum()/count
+    avg = 0
+    if count:
+        avg = (activity .sum(axis=1)*frame_bar).sum()/count
     return [(avg,0),count]
 
 def draw_circle(img, pos):
@@ -47,19 +48,18 @@ def draw_box(img, pos):
 def move_towards_target(activity_pos, view_box):
     diff = activity_pos[0] - view_box[0]
     mov = diff/5 
-    mov = 20 if 0 < mov < 20 else mov
+    # mov = 20*(mov) if 0 < mov < 20 else mov
     return [view_box[0]+mov,view_box[1]]
 
-test = cam.getImage() 
-camera_view = [test.width/2, test.height/2]
+camera_view = [frame_spec[0]/2, frame_spec[1]/2]
 last_scene = [0,0]
-for i in range(50):
-    first = cam.getImage() 
-    time.sleep(0.1)
-    second = cam.getImage() 
-    img = (first-second).binarize(20)
+for i in range(100):
+    first = cam.getImage().scale(frame_spec[0], frame_spec[1])
+    time.sleep(0.05)
+    second = cam.getImage().scale(frame_spec[0], frame_spec[1]) 
+    img = (first-second).binarize(50)
     [pos,weight]= get_average_activity_pos(img)
-    if weight > 500:
+    if weight > 50:
          draw_circle(first, pos)
          last_scene = [pos[0], pos[1]]
     # txt = "Activity:" + str(weight)
@@ -67,10 +67,11 @@ for i in range(50):
     camera_view = move_towards_target(last_scene, camera_view)
     draw_box(first, camera_view)
 
-    set_servo(int(camera_view[0]*(100.0/test.width))+40)
-
+    set_servo(int(camera_view[0]*(100.0/frame_spec[0]))+40)
+    print weight
     # win = first.show()
     
-    #win = first.show()
+    win = first.show()
+
 
 #win.quit()
