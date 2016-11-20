@@ -5,6 +5,9 @@ import wiringpi
 
 cam = Camera()
 
+frame_spec = [cam.getImage().width, cam.getImage().height]
+frame_bar = np.array(range(frame_spec[0]))
+
 # use 'GPIO naming'
 wiringpi.wiringPiSetupGpio()
 # set #18 to be a PWM output
@@ -25,17 +28,10 @@ def set_servo(degrees):
 def get_average_activity_pos(img):
     val = img.getNumpy()
     activity = (val[:,:,1] < 1)
-    count = 0
-    total = (0,0)
-    for i in xrange(val.shape[0]):
-        for j in xrange(val.shape[1]):
-            if activity[i,j]:
-                count += 1
-                total = (total[0]+i, total[1]+j)
-    if count:
-        return [(total[0]/count, total[1]/count), count]
-    else:
-        return [(0,0),0]
+    count = activity.sum()
+    total = [0,0]
+    avg = (activity.sum(axis=1)*frame_bar).sum()/count
+    return [(avg,0),count]
 
 def draw_circle(img, pos):
     overlay = DrawingLayer((img.width, img.height))
