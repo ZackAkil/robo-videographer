@@ -23,6 +23,6 @@ The final aim is to use the system to record a tag rugby matches with no human i
 - [x] Get OpenCV/SimpleCV working on computer
 - [x] Develope simple "action tracking"
 - [x] Develope simple servo control on raspberry pi
-- [ ] Add "smooth action tracking"
+- [x] Add "smooth action tracking"
 - [x] Get OpenCV/SimpleCV working on raspberry pi
 - [ ] Merge action tracking with servo control
