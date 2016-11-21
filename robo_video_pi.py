@@ -1,9 +1,12 @@
-from SimpleCV import *
+
 import time
+from multiprocessing import Process, Value
+
+from SimpleCV import *
 import numpy
 import wiringpi
+import pytweening
 
-cam = Camera()
 
 # use 'GPIO naming'
 wiringpi.wiringPiSetupGpio()
@@ -15,14 +18,30 @@ wiringpi.pwmSetMode(wiringpi.GPIO.PWM_MODE_MS)
 wiringpi.pwmSetClock(192)
 wiringpi.pwmSetRange(2000)
 
-delay_period = 0.01
-
 def set_servo(degrees):
     pulse = int((200/180.0)*degrees) + 50
     wiringpi.pwmWrite(18, pulse)
 
+
+def servo_control(target,stop):
+    current_pos = 0.0
+    while not stop.value:
+        time.sleep(0.02)
+        diff = (current_pos - target.value)
+        if diff:
+            move = pytweening.easeInQuad(abs(diff/200.0))
+            move = move if diff < 0 else -move 
+            current_pos += move*100
+            set_servo(current_pos+40)
+
 frame_spec = [160, 120]
 frame_bar = np.array(range(frame_spec[0]))
+
+def draw_box(img, pos):
+    overlay = DrawingLayer((img.width, img.height))
+    overlay.centeredRectangle(pos,(100,100), color=Color.RED)
+    img.addDrawingLayer(overlay)
+    img.applyLayers()
 
 def get_average_activity_pos(img):
     val = img.getNumpy()
@@ -33,45 +52,32 @@ def get_average_activity_pos(img):
         avg = (activity .sum(axis=1)*frame_bar).sum()/count
     return [(avg,0),count]
 
-def draw_circle(img, pos):
-    overlay = DrawingLayer((img.width, img.height))
-    overlay.circle(pos, 10, color=Color.RED)
-    img.addDrawingLayer(overlay)
-    img.applyLayers()
+def camera_tracking(target,stop):
+    cam = Camera()
+    box_x = 0
+    for i in range(150):
+        first = cam.getImage().scale(frame_spec[0], frame_spec[1])
+        time.sleep(0.05)
+        second = cam.getImage().scale(frame_spec[0], frame_spec[1]) 
+        img = (first-second).binarize(50)
+        [pos,weight]= get_average_activity_pos(img)
+        if weight > 50:
+            print 'over weight ' + str(pos[0])
+            target.value = int(pos[0]*(100.0/frame_spec[0]))
+            box_x = pos[0]
+        draw_box(first, [box_x,frame_spec[1]/2])
+        win = first.show()
+    win.quit()
+    stop.value = 1.0
 
-def draw_box(img, pos):
-    overlay = DrawingLayer((img.width, img.height))
-    overlay.centeredRectangle(pos,(100,100), color=Color.RED)
-    img.addDrawingLayer(overlay)
-    img.applyLayers()
+if __name__ == '__main__':
+    target = Value('d',0.0)
+    stop = Value('d',0.0)
 
-def move_towards_target(activity_pos, view_box):
-    diff = activity_pos[0] - view_box[0]
-    mov = diff/5 
-    # mov = 20*(mov) if 0 < mov < 20 else mov
-    return [view_box[0]+mov,view_box[1]]
-
-camera_view = [frame_spec[0]/2, frame_spec[1]/2]
-last_scene = [0,0]
-for i in range(100):
-    first = cam.getImage().scale(frame_spec[0], frame_spec[1])
-    time.sleep(0.05)
-    second = cam.getImage().scale(frame_spec[0], frame_spec[1]) 
-    img = (first-second).binarize(50)
-    [pos,weight]= get_average_activity_pos(img)
-    if weight > 50:
-         draw_circle(first, pos)
-         last_scene = [pos[0], pos[1]]
-    # txt = "Activity:" + str(weight)
-    # first.drawText(txt)
-    camera_view = move_towards_target(last_scene, camera_view)
-    draw_box(first, camera_view)
-
-    set_servo(int(camera_view[0]*(100.0/frame_spec[0]))+40)
-    print weight
-    # win = first.show()
+    cam_process = Process(target=camera_tracking, args=(target,stop))
+    cam_process.start()
     
-    win = first.show()
+    servo_process = Process(target=servo_control, args=(target,stop))
+    servo_process.start()
 
 
-#win.quit()
