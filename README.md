@@ -28,6 +28,7 @@ The final aim is to use the system to record a tag rugby matches with no human i
 - [x] Get OpenCV/SimpleCV working on raspberry pi
 - [x] Merge action tracking with servo control
 - [x] Optimise action finding code to run faster 
+- [ ] Add concurrency between servo control and action detection
 
 ### Hardware
 - [ ] Design enclosure
