@@ -16,7 +16,7 @@ The final aim is to use the system to record a tag rugby matches with no human i
 
 ## Intial Design
 1. Get OpenCV/SimpleCV working on the Raspberry Pi with the camera.
-2. Build a program that tracks the pixel activity (with directional momentum).
+2. Build a program that tracks the pixel activity.
 3. Output activity value to a servo position.
 
 ## Progress
