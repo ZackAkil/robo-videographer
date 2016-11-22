@@ -32,4 +32,4 @@ The final aim is to use the system to record a tag rugby matches with no human i
 
 ### Hardware
 - [ ] Design enclosure
-- [ ] Source tri-pod
+- [x] Source tri-pod
