@@ -34,3 +34,6 @@ The final aim is to use the system to record a tag rugby matches with no human i
 - [ ] Design enclosure
 - [x] Source tri-pod
 - [x] Mount servo to tri-pod
+- [ ] Mount camera to tri-pod
+- [ ] Mount Pi to tri-pod
+- [ ] Mount Power to tri-pod
