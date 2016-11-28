@@ -31,7 +31,7 @@ The final aim is to use the system to record a tag rugby matches with no human i
 - [x] Add concurrency between servo control and action detection using [python processes](https://docs.python.org/2/library/multiprocessing.html)
 
 ### Hardware
-- [ ] Design enclosure
+~~- [ ] Design enclosure~~
 - [x] Source tri-pod
 - [x] Mount servo to tri-pod
 - [ ] Mount camera to tri-pod
