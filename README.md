@@ -38,6 +38,7 @@ The final aim is to use the system to record a tag rugby matches with no human i
 - [x] Mount Power to tri-pod
 - [x] 3D model case
 - [ ] wire up power splitter
+
 ### Extra Software
 - [ ] Get Pi to act as wifi base
 - [ ] Connect android to Pi by wifi
