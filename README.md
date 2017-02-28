@@ -40,7 +40,8 @@ The final aim is to use the system to record a tag rugby matches with no human i
 - [ ] wire up power splitter
 
 ### Extra Software
-- [ ] Load via new sd card
+- [x] Load via new sd card
+- [ ] Add script auto-run with switch
 - [ ] Get Pi to act as wifi base
 - [ ] Connect android to Pi by wifi
 - [ ] View image from camera on android via wifi
