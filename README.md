@@ -44,3 +44,7 @@ The final aim is to use the system to record a tag rugby matches with no human i
 - [ ] Get Pi to act as wifi base
 - [ ] Connect android to Pi by wifi
 - [ ] View image from camera on android via wifi
+
+### Notes
+
+Use `sudo modprobe bcm2835-v4l2` to activate camera.
