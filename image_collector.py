@@ -1,12 +1,22 @@
+from gpiozero import LED, Button
+from time import sleep
 import picamera
-import time
 
 camera = picamera.PiCamera()
+led = LED(17)
+button = Button(27, pull_up=False)
 
-for i in range(5):
-    time.sleep(t)
-    ts = str(time.time()).replace('.','')
-    # ensure file name length is the same by appending 0's
-    ts += '0'*(12 - len(ts))
+def record():
+    led.on()
+    sleep(0.1)
+    capture_image()
+    led.off()
+    sleep(0.1)
+
+def capture_image():
+    ts = str(time.time())
     camera.capture('capture/{0}.jpg'.format(ts))
-    print('got image', ts)
+
+while True:
+    if button.is_pressed:
+        record()
