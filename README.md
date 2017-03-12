@@ -49,3 +49,9 @@ The final aim is to use the system to record a tag rugby matches with no human i
 ### Notes
 
 Use `sudo modprobe bcm2835-v4l2` to activate camera.
+
+### Resources
+
+http://www.raspberrypi-spy.co.uk/2015/02/how-to-autorun-a-python-script-on-raspberry-pi-boot/
+
+https://gpiozero.readthedocs.io/en/stable/recipes.html
