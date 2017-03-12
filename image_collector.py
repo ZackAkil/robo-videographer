@@ -10,10 +10,10 @@ button = Button(27, pull_up=False)
 IMAGE_FOLDER_PATH = os.path.dirname(os.path.realpath(__file__)) + '/capture/'
 
 def record():
-    led.off()
     capture_image()
     led.on()
-    sleep(0.1)
+    sleep(0.05)
+    led.off()
 
 def capture_image():
     ts = str(time())
