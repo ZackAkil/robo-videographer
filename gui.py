@@ -38,16 +38,23 @@ def motion(event):
 def callback(event):
     print ("clicked at", event.x, event.y)
 
+def key(event):
+    if event.char == '\uf703':
+        print('right')
+    elif event.char == '\uf702':
+        print('left')
+    elif event.char == '\uf701':
+        print('down')
+    else:
+        print("pressed", repr(event.char))
+
 root = Tk()
-
-
-
 
 # b = Canvas(root, width=650, height=100)
 # b.pack()
 
 
-image = Image.open("1489359289.22.jpg")
+image = Image.open("/Users/zackakil/Desktop/capture clean/1489359289.22.jpg")
 photo = ImageTk.PhotoImage(image)
 # label = Label(b,image=photo)
 # label.image = photo # keep a reference!
@@ -56,6 +63,7 @@ photo = ImageTk.PhotoImage(image)
 line = None
 root.bind('<Motion>', motion)
 root.bind("<Button-1>", callback)
+root.bind("<Key>", key)
 w = Canvas(root, width=650, height=500)
 
 w.pack()
