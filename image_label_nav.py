@@ -38,7 +38,10 @@ class Image_Label_Cycler():
                                  pos_value)
 
     def get_image_pos_value(self, file_name):
-        return self.pos_store[file_name]
+        if file_name in self.pos_store.keys():
+            return self.pos_store[file_name]
+        else:
+            return None
 
     def get_current_pos_value(self):
         return self.get_image_pos_value(self.current_image_name)
