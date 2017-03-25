@@ -41,10 +41,15 @@ The final aim is to use the system to record a tag rugby matches with no human i
 
 ### Extra Software
 - [x] Load via new sd card
-- [ ] Add script auto-run with switch
+- [x] Add script auto-run with switch
 - [ ] Get Pi to act as wifi base
 - [ ] Connect android to Pi by wifi
 - [ ] View image from camera on android via wifi
+
+### Other processes
+- [x] Collect training data
+- [ ] Build tool to help label training data
+- [ ] Label training data
 
 ### Notes
 
