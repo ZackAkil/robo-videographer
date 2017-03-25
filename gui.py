@@ -5,6 +5,10 @@ from os import listdir
 from os.path import isfile, join
 import pandas as pd
 
+import image_label_nav
+
+ilc = image_label_nav.Image_Label_Cycler("/Users/zackakil/Desktop/capture clean")
+
 class Application(Frame):
     def say_hi(self):
         print("hi there, everyone!")
@@ -43,6 +47,7 @@ IMAGE_FOLDER_PATH = "/Users/zackakil/Desktop/capture clean/"
 current_photo = None
 
 def display_image(file_name):
+    print('file to open', file_name)
     image = Image.open(IMAGE_FOLDER_PATH + file_name)
     photo = ImageTk.PhotoImage(image)
     w.delete("all")
@@ -57,14 +62,16 @@ root.bind("<Button-1>", callback)
 w = Canvas(root, width=650, height=500)
 w.pack()
 
-display_image("1489359289.22.jpg")
+display_image(ilc.current_image_name)
 
 def key(event):
     if event.char == '\uf703':
         print('right')
-        display_image("1489361286.3.jpg")
+        ilc.next_photo()
+        display_image(ilc.current_image_name)
     elif event.char == '\uf702':
-        display_image("1489359249.97.jpg")
+        ilc.next_photo(-1)
+        display_image(ilc.current_image_name)
         print('left')
     elif event.char == '\uf701':
         print('down')
