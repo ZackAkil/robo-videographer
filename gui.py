@@ -4,10 +4,17 @@ from PIL import Image, ImageTk
 from os import listdir
 from os.path import isfile, join
 import pandas as pd
-
 import image_label_nav
+import os.path
 
-ilc = image_label_nav.Image_Label_Cycler("/Users/zackakil/Desktop/capture clean")
+
+LABEL_CSV = 'rugby_image_labels.csv'
+
+if os.path.exists(LABEL_CSV):
+    ilc = image_label_nav.Image_Label_Cycler("/Users/zackakil/Desktop/capture clean", LABEL_CSV)
+else: 
+    ilc = image_label_nav.Image_Label_Cycler("/Users/zackakil/Desktop/capture clean")
+
 
 class Application(Frame):
     def say_hi(self):
@@ -52,6 +59,15 @@ def callback(event):
     ilc.next_photo()
     display_image(ilc.current_image_name)
     print ("clicked at", event.x, event.y)
+    ilc.save_labels(LABEL_CSV)
+
+def callback2(event):
+    ilc.set_current_pos_value(None)
+    display_photo_label_line()
+    ilc.next_photo()
+    display_image(ilc.current_image_name)
+    print ("dump clicked at", event.x, event.y)
+    ilc.save_labels(LABEL_CSV)
 
 def display_image(file_name):
     print('file to open', file_name)
@@ -84,13 +100,14 @@ current_photo = None
 # mouse_line = None
 # photo_line = None
 
-
-root.bind('<Motion>', motion)
-root.bind("<Button-1>", callback)
-root.bind("<Key>", key)
-
 w = Canvas(root, width=650, height=500)
 w.pack()
+
+w.bind('<Motion>', motion)
+w.bind("<Button-1>", callback)
+w.bind("<Button-2>", callback2)
+root.bind("<Key>", key)
+
 
 display_image(ilc.current_image_name)
 
