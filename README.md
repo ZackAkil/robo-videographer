@@ -48,8 +48,8 @@ The final aim is to use the system to record a tag rugby matches with no human i
 
 ### Other processes
 - [x] Collect training data
-- [ ] Build tool to help label training data
-- [ ] Label training data
+- [x] Build tool to help label training data
+- [x] Label training data
 
 ### Notes
 
@@ -60,3 +60,7 @@ Use `sudo modprobe bcm2835-v4l2` to activate camera.
 http://www.raspberrypi-spy.co.uk/2015/02/how-to-autorun-a-python-script-on-raspberry-pi-boot/
 
 https://gpiozero.readthedocs.io/en/stable/recipes.html
+
+### Testing 
+- [ ] Compare feature engineering with prediction speed 
+- [ ] Compare temporal framing sizes
