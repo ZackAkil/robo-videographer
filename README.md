@@ -63,6 +63,8 @@ https://gpiozero.readthedocs.io/en/stable/recipes.html
 
 https://en.wikipedia.org/wiki/Optical_flow
 
+http://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html
+
 ### Testing 
 - [ ] Compare feature engineering with prediction speed and accuracy
 - [ ] Compare temporal framing sizes with prediction speed and accuracy
