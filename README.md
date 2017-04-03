@@ -61,6 +61,8 @@ http://www.raspberrypi-spy.co.uk/2015/02/how-to-autorun-a-python-script-on-raspb
 
 https://gpiozero.readthedocs.io/en/stable/recipes.html
 
+https://en.wikipedia.org/wiki/Optical_flow
+
 ### Testing 
 - [ ] Compare feature engineering with prediction speed and accuracy
 - [ ] Compare temporal framing sizes with prediction speed and accuracy
