@@ -65,6 +65,8 @@ https://en.wikipedia.org/wiki/Optical_flow
 
 http://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html
 
+https://www.modmypi.com/blog/how-do-i-power-my-raspberry-pi
+
 ### Testing 
 - [ ] Compare feature engineering with prediction speed and accuracy
 - [ ] Compare temporal framing sizes with prediction speed and accuracy
