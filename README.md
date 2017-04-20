@@ -67,6 +67,8 @@ http://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSea
 
 https://www.modmypi.com/blog/how-do-i-power-my-raspberry-pi
 
+https://en.wikipedia.org/wiki/Recurrent_neural_network
+
 ### Testing 
 - [ ] Compare feature engineering with prediction speed and accuracy
 - [ ] Compare temporal framing sizes with prediction speed and accuracy
