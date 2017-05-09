@@ -8,7 +8,7 @@ import image_label_nav
 import os.path
 
 
-LABEL_CSV = 'rugby_image_labels.csv'
+LABEL_CSV = 'rugby_image_labels_5.csv'
 
 if os.path.exists(LABEL_CSV):
     ilc = image_label_nav.Image_Label_Cycler("/Users/zackakil/Desktop/capture clean", LABEL_CSV)
