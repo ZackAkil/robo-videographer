@@ -1,6 +1,9 @@
 # Robo Videographer
 Project for a automatic videographer system for recording sports matches.
 
+[![Robo Videographer](https://img.youtube.com/vi/H2UNijCq-v4/0.jpg)](https://www.youtube.com/watch?v=H2UNijCq-v4)  
+  
+
 ## Technical objective
 The aim is to create a computer vision tracking system that can run on a Raspberry Pi using the camera module that tracks the action happening on a rugby pitch.
 
